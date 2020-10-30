@@ -6,20 +6,29 @@ using System.Threading.Tasks;
 
 namespace CustomException
 {
+    //[Serializable]
+    //public class CarIsDeadException : ApplicationException
+    //{
+    //    public CarIsDeadException() { }
+    //    public CarIsDeadException(string message) : base(message) { }
+    //    public CarIsDeadException(string message,
+    //    System.Exception inner)
+    //    : base(message, inner) { }
+    //    protected CarIsDeadException(
+    //    System.Runtime.Serialization.SerializationInfo info,
+    //    System.Runtime.Serialization.StreamingContext context)
+    //    : base(info, context) { }
+    //    // Any additional custom properties, constructors and data members...
+    //}
+
+    [Serializable]
     public class CarIsDeadException : ApplicationException
     {
-        private string messageDetails = String.Empty;
-        public DateTime ErrorTimeStamp { get; set; }
-        public string CauseOfError { get; set; }
         public CarIsDeadException() { }
-        public CarIsDeadException(string message,
-        string cause, DateTime time)
-        {
-            messageDetails = message;
-            CauseOfError = cause;
-            ErrorTimeStamp = time;
-        }
-        // Override the Exception.Message property.
-        public override string Message => $"Car Error Message: {messageDetails}";
+        public CarIsDeadException(string message) : base(message) { }
+        public CarIsDeadException(string message, ApplicationException inner) : base(message, inner) { }
+        protected CarIsDeadException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
     }
 }
